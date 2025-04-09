@@ -74,13 +74,20 @@ Use JavaScript (Fetch API) to send the request to the Flask backend. Display the
 AI Task Allocator
 
 Task Description:
+   
+
+<form>
     <label for="category">Category:</label>
     <select id="category">
         <option value="Backend">Backend</option>
         <option value="Frontend">Frontend</option>
         <option value="Data Science">Data Science</option>
         <option value="DevOps">DevOps</option>
-    </select><br>
+    </select><br><br>
+
+    <label for="taskDesc">Task Description:</label>
+    <input type="text" id="taskDesc" placeholder="Enter task description"><br><br>
+
     <button type="button" onclick="predictSkill()">Predict Skill</button>
 </form>
 
@@ -94,15 +101,19 @@ Task Description:
         fetch('http://127.0.0.1:5000/predict', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ "taskDesc": taskDesc, "category": category })
+            body: JSON.stringify({ taskDesc: taskDesc, category: category })
         })
         .then(response => response.json())
         .then(data => {
             document.getElementById('result').innerText = "Predicted Skill: " + data.skill;
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('result').innerText = "Error occurred while predicting skill.";
+        });
     }
 </script>
+
 
 Running the Project (Step-by-Step) Follow these steps to set up and run the project:
 
