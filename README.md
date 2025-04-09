@@ -72,6 +72,7 @@ Use JavaScript (Fetch API) to send the request to the Flask backend. Display the
 <title>AI Task Allocator</title> <style> body { font-family: Arial, sans-serif; text-align: center; margin: 50px; } input, select, button { margin: 10px; padding: 10px; } </style>
 
 AI Task Allocator
+
 Task Description:
     <label for="category">Category:</label>
     <select id="category">
@@ -80,7 +81,6 @@ Task Description:
         <option value="Data Science">Data Science</option>
         <option value="DevOps">DevOps</option>
     </select><br>
-    
     <button type="button" onclick="predictSkill()">Predict Skill</button>
 </form>
 
