@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Task Allocator</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+        input, select, button { margin: 10px; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h2>AI Task Allocator</h2>
+    <form id="taskForm">
+        <label for="taskDesc">Task Description:</label>
+        <input type="text" id="taskDesc" name="taskDesc" required><br>
+        
+        <label for="category">Category:</label>
+        <select id="category" name="category">
+            <option value="Backend">Backend</option>
+            <option value="Frontend">Frontend</option>
+            <option value="Data Science">Data Science</option>
+            <option value="DevOps">DevOps</option>
+        </select><br>
+        
+        <button type="button" onclick="predictSkill()">Predict Skill</button>
+    </form>
+    
+    <h3 id="result"></h3>
+    
+    <script>
+        function predictSkill() {
+            const taskDesc = document.getElementById('taskDesc').value;
+            const category = document.getElementById('category').value;
+            
+            fetch('http://127.0.0.1:5000/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ "taskDesc": taskDesc, "category": category })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = "Predicted Skill: " + data.skill;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
